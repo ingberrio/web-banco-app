@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Account;
+use App\Livewire\Index;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-Route::get('/cuentas', function () {
-    return view('accounts');
-});
+Route::get('/accounts', Account::class);
+Route::get('/', Index::class);
