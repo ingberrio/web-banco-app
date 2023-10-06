@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Iniciar Sesión</title>
+    <title>Banco App</title>
     <meta charset="utf-8">
     <script src="https://cdn.tailwindcss.com"></script>
 
