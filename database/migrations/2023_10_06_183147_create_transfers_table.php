@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('transfers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedDecimal('balance', 10, 2);
+            $table->unsignedDecimal('quantity', 20, 2);
             $table->foreignId('root_account_id')
                 ->constrained('accounts')
                 ->cascadeOnUpdate()

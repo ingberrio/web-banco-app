@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('identification');
-            $table->decimal('balance', 10, 2);
+            $table->decimal('balance', 20, 2);
             $table->timestamps();
         });
     }

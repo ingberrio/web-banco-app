@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Account;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class AccountController extends Controller
 {
@@ -13,8 +14,12 @@ class AccountController extends Controller
     public function index()
     {
         //
-        $accounts = Account::all();  
-        return response()->json($accounts);     
+        $accounts = Account::all(); 
+        //return response()->json($accounts);      
+        // $url = env('URL_SERVER_API', 'http://127.0.0.1');
+        // $response = Http::get($url.'/accounts');
+        // $accounts = $response->json();
+        return view('livewire.account', compact('accounts'));
     }
 
     /**
@@ -100,4 +105,5 @@ class AccountController extends Controller
             'message' => 'Account deleted successfully',
         ],200);
     }
+
 }

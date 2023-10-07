@@ -1,8 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Http;
 use App\Livewire\Account;
 use App\Livewire\Index;
+use App\Http\Controllers\AccountController;
+use App\Http\Livewire\TransferForm;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,5 +18,9 @@ use App\Livewire\Index;
 |
 */
 
-Route::get('/accounts', Account::class);
+Route::get('transfer-form', Index::class)->name('transfer-form');
+
 Route::get('/', Index::class);
+
+Route::get('/accounts', Account::class)->name('accounts');
+Route::post('/transfer', [AccountController::class, 'transfer'])->name('transfer');
