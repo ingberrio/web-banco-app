@@ -9,5 +9,5 @@ class Transfer extends Model
 {
     use HasFactory;
     protected $table = 'transfers';
-    protected $fillable = ['balance', 'root_account_id', 'destination_account_id'];
+    protected $fillable = ['quantity', 'root_account_id', 'destination_account_id'];
 }

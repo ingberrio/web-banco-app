@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Http;
 use App\Livewire\Account;
 use App\Livewire\Index;
 use App\Http\Controllers\AccountController;
-use App\Http\Livewire\TransferForm;
+use App\Livewire\TransferForm;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +17,15 @@ use App\Http\Livewire\TransferForm;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::middleware(['web'])->group(function () {
+    // Otras rutas de tu aplicación
 
-Route::get('transfer-form', Index::class)->name('transfer-form');
+    // Rutas de Livewire
+    Route::get('/', Index::class);
 
-Route::get('/', Index::class);
+    Route::get('/accounts', Account::class)->name('accounts');
+    Route::post('/transfer', [AccountController::class, 'transfer'])->name('transfer');
 
-Route::get('/accounts', Account::class)->name('accounts');
-Route::post('/transfer', [AccountController::class, 'transfer'])->name('transfer');
+});
+Route::get('/transfer-form', Index::class);
+
