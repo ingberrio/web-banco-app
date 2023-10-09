@@ -1,0 +1,12 @@
+/* Establece el color de fondo de las filas en blanco */
+
+Body {
+    background-color: rgb(170, 197, 241);
+}
+  
+th {
+    background-color: white;
+}  
+td {
+    background-color: rgb(243, 248, 221);
+}

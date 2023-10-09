@@ -198,4 +198,9 @@ return [
 
     'same_site' => 'lax',
 
+    'middleware' => [
+        'web',
+        // ...
+    ],
+
 ];

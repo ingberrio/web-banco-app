@@ -15,10 +15,10 @@ class AccountController extends Controller
     {
         //
         $accounts = Account::all(); 
-        //return response()->json($accounts);      
-        // $url = env('URL_SERVER_API', 'http://127.0.0.1');
-        // $response = Http::get($url.'/accounts');
-        // $accounts = $response->json();
+        return response()->json($accounts);      
+        $url = env('URL_SERVER_API', 'http://127.0.0.1');
+        $response = Http::get($url.'/accounts');
+        $accounts = $response->json();
         return view('livewire.account', compact('accounts'));
     }
 
