@@ -8,6 +8,7 @@ use App\Http\Controllers\AccountController;
 use App\Livewire\TransferForm;
 use App\Livewire\Transfer;
 use App\Livewire\Reports\ViewReport;
+use App\Livewire\Accounts\AccountForm;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,7 @@ Route::middleware(['web'])->group(function () {
     
     //Route::get('/transfer-form', TransferForm::class)->name('transfer-form');
     Route::get('/reports/view', ViewReport::class)->name('reports.view');
-
+    
 });
 
 

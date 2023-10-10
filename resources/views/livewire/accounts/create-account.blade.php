@@ -22,11 +22,11 @@
             </div>
             <div class="flex flex-col mb-4">
                 <label class="text-sm font-bold">Nombre completo</label>
-                <input type="text" wire:model="name" class="w-full p-2 border-2 rounded-lg" id="name" name="name">
+                <input type="text" wire:model="name" class="w-full p-2 border-2 rounded-lg" >
             </div>
             <div class="flex flex-col mb-4">
                 <label class="text-sm font-bold">Saldo inicial</label>
-                <input type="number" wire:model="balance" class="w-full p-2 border-2 rounded-lg" id="balance" name="balance">
+                <input type="number" wire:model="balance" class="w-full p-2 border-2 rounded-lg" >
             </div>
             <input type="hidden" wire:model="transactions_count" value="0">
                 

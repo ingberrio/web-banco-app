@@ -1,6 +1,6 @@
 # Bank Account Management App
 
-![Bank App Screenshot](public/images/portada.png)
+![Bank App Screenshot](https://postimg.cc/p5Twckhq)(https://postimg.cc/8fchFf97)(https://i.postimg.cc/JnK92D5J/transfer.png)(https://i.postimg.cc/gcQ6Cw7v/reports.png)
 
 ## Description
 
@@ -9,9 +9,18 @@ This is a simple web application for managing bank accounts and performing trans
 ## Features
 
 - 💼 Account Creation: Users can create new bank accounts by providing their personal information such as name, identification, and initial balance.
+
+![Account Creation](https://postimg.cc/8fchFf97)
+
 - 📜 Account Listing: The application displays a list of all created bank accounts, including their names and balances.
 - 🔄 Account Transfer: Users can initiate transfers between two bank accounts by specifying the source account, destination account, and the transfer amount.
+
+![Account Listing](https://i.postimg.cc/JnK92D5J/transfer.png)
+
 - 🕒 Transaction History: The app keeps a record of all transfers, including the source and destination accounts and the transfer amounts.
+
+![Transaction History](https://i.postimg.cc/gcQ6Cw7v/reports.png)
+
 - 📈 Interest Calculation: The application calculates interest on accounts based on the number of monthly transactions. If a user performs at least 10 transactions in a month, the interest rate increases by 0.2%. Otherwise, it decreases by 0.2%.
 
 ## Technologies Used
