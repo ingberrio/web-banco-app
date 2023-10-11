@@ -1,6 +1,6 @@
 # Bank Account Management App
 
-![Bank App Screenshot]((https://postimg.cc/8fchFf97)(https://i.postimg.cc/JnK92D5J/transfer.png)
+![Bank App Screenshot](https://i.postimg.cc/JnK92D5J/transfer.png)
 
 ## Description
 
@@ -10,7 +10,7 @@ This is a simple web application for managing bank accounts and performing trans
 
 - 💼 Account Creation: Users can create new bank accounts by providing their personal information such as name, identification, and initial balance.
 
-![Account Creation](https://postimg.cc/8fchFf97](https://i.postimg.cc/tJtDMhzN/accounts.png)
+![Account Creation](https://i.postimg.cc/tJtDMhzN/accounts.png)
 
 - 📜 Account Listing: The application displays a list of all created bank accounts, including their names and balances.
 - 🔄 Account Transfer: Users can initiate transfers between two bank accounts by specifying the source account, destination account, and the transfer amount.
