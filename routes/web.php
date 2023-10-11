@@ -5,8 +5,7 @@ use Illuminate\Support\Facades\Http;
 use App\Livewire\Account;
 use App\Livewire\Index;
 use App\Http\Controllers\AccountController;
-use App\Livewire\TransferForm;
-use App\Livewire\Transfer;
+use App\Livewire\Accounts\TransferAccount;
 use App\Livewire\Reports\ViewReport;
 use App\Livewire\Accounts\AccountForm;
 
@@ -22,19 +21,13 @@ use App\Livewire\Accounts\AccountForm;
 */
 Route::middleware(['web'])->group(function () {
     
-   
-    // Rutas de Livewire
     Route::get('/', Index::class);
-    //Route::get('/accounts/account-list', Account::class);
-    //Route::get('/', [AccountController::class, 'index']);
-
 
     Route::get('/accounts', Account::class)->name('accounts');
-    Route::post('/transfer', [AccountController::class, 'transfer'])->name('accounts.transfer');
     
-    //Route::get('/transfer-form', TransferForm::class)->name('transfer-form');
     Route::get('/reports/view', ViewReport::class)->name('reports.view');
     
+    Route::get('/accounts/transfer-account', TransferAccount::class)->name('accounts.transfer-account');   
 });
 
 

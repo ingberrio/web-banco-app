@@ -20,9 +20,10 @@
                 <input type="number" wire:model="quantity"  id="quantity" class="w-full p-2 border-2 rounded-lg" >
             </div>
 
-            <button wire:click="transfer" class="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded-lg" >Aceptar</button>
+            <button wire:click.prevent="transfer" class="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded-lg" >Aceptar</button>
         </form>
     </div>
   
 </div>
+
 

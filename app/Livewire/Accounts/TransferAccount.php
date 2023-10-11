@@ -6,31 +6,42 @@ use Livewire\Component;
 use App\Models\Account;
 use App\Models\Transfer;
 use Illuminate\Http\Request;
+use Livewire\Attributes\On; 
 
 class TransferAccount extends Component
 {
     
+    //     try {
+    //         $rootAccount = Account::where('identification', $this->root_account_id)->firstOrFail();
+    //     }
+    //     catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e)
+    //     {
+    //         // Model Not Found
+    //         return redirect()->back()->with('error', 'Saldo insuficiente para realizar la transferencia');
+    //     }
+    //     catch (\Exception $e)
+    //     {
+    //         // Something else went wrong
+    //         return redirect()->back()->with('error', 'Saldo insuficiente para realizar la transferencia');
+    //     }
+    // }
     
-    protected $listeners = ['transferAccount' => 'fillTransferForm'];
-    
-
     public $root_account_id = '';
     public $destination_account_id ='';
     public $quantity = '';
 
 
-    public function render()
+    public function mout()
     {
-        return view('livewire.accounts.transfer-account');
+        
     }
 
     public function transfer(Request $request)
     {
-        dd($this->quantity);
+        
         // Retrieve the ID associated with root_account_id and destination_account_id
         $rootAccountId = Account::where('identification', $this->root_account_id)->value('id');
         $destinationAccountId = Account::where('identification', $this->destination_account_id)->value('id');
-        dd($rootAccountId);
 
         $rootAccount = Account::where('identification', $this->root_account_id)->first();
         $destinationAccount = Account::where('identification', $this->destination_account_id)->first();
@@ -64,10 +75,20 @@ class TransferAccount extends Component
         return redirect('/accounts');
     }
     
+    /**
+     * FILEPATH: /web-banco-app/app/Livewire/Accounts/TransferAccount.php
+     * 
+     * This method is triggered when the 'transferAccount' event is emitted. It fills the transfer form with the given balance and identification.
+     *
+     * @param float $balance The balance to be transferred.
+     * @param int $identification The identification of the root account.
+     * @return void
+     */
+    #[On('transferAccount')]
     
-    public function fillTransferForm($quantity, $rootAccountId)
+    public function fillTransferForm($balance, $identification)
     {
-        $this->quantity = $quantity;
-        $this->root_account_id = $rootAccountId;
+        $this->root_account_id = $identification;
+        $this->quantity = $balance;
     }
 }

@@ -10,20 +10,17 @@ class ListAccount extends Component
     public $root_account_id;
     public $quantity;
     
-    
-    public function render()
+    public $accounts;
+
+    public function mount()
     {
-        
-        return view('livewire.accounts.list-account',[
-                'accounts' => Account::all()
-            ]   
-        );
+        $this->accounts = Account::select(['id', 'name', 'balance', 'identification'])->get();
     }
     
-    public function fillTransferForm($balance, $identification)
+    public function transferAccount($balance, $identification)
     {
-        $this->dispatch('fillTransferForm', $this->quantity, $this->root_account_id);
-    
+        $this->dispatch('transferAccount', $balance, $identification);
     }
+    
 
 }
