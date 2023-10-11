@@ -25,9 +25,13 @@ class TransferAccount extends Component
     //         return redirect()->back()->with('error', 'Saldo insuficiente para realizar la transferencia');
     //     }
     // }
-    
+    #[Rule('required')]
     public $root_account_id = '';
+    
+    #[Rule('required')]
     public $destination_account_id ='';
+    
+    #[Rule('required')]
     public $quantity = '';
 
 
@@ -38,13 +42,18 @@ class TransferAccount extends Component
 
     public function transfer(Request $request)
     {
-        
+        $this->validate([
+            'root_account_id' => 'required|max:255',
+            'destination_account_id' => 'required|max:255',
+            'quantity' => 'required|numeric',
+        ]); 
+      
         // Retrieve the ID associated with root_account_id and destination_account_id
         $rootAccountId = Account::where('identification', $this->root_account_id)->value('id');
         $destinationAccountId = Account::where('identification', $this->destination_account_id)->value('id');
 
-        $rootAccount = Account::where('identification', $this->root_account_id)->first();
-        $destinationAccount = Account::where('identification', $this->destination_account_id)->first();
+        $rootAccount = Account::where('identification', $this->root_account_id)->firstOrFail();
+        $destinationAccount = Account::where('identification', $this->destination_account_id)->firstOrFail();
         
 
         if (!$destinationAccount) {
@@ -53,7 +62,7 @@ class TransferAccount extends Component
         
         if ($rootAccount->balance < $this->quantity) {
             return redirect()->back()->with('error', 'Saldo insuficiente para realizar la transferencia');
-        }
+        } 
         
         
         $rootAccount->balance -= $this->quantity;

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('identification');
             $table->decimal('balance', 20, 2);
             $table->string('transactions_count');
+            $table->integer('tipo');
             $table->timestamps();
         });
     }

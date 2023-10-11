@@ -8,10 +8,12 @@ use App\Models\Account;
 
 class CreateAccount extends Component
 {
-    #[Rule('required')] 
+    #[Rule('required|unique', message: 'Debe ingresar un id')] 
     public $identification ='';
+    
     #[Rule('required')] 
     public $name ='';
+    
     public $balance ='';
     public $transactions_count ='';
 
@@ -23,7 +25,7 @@ class CreateAccount extends Component
     public function store(Request $request)
     {
         $this->validate([
-            'identification' => 'required|string|max:255',
+            'identification' => 'required|string|max:255|unique:accounts,identification,except,id',
             'name' => 'required|string|max:255',
             'balance' => 'required|numeric',
             'transactions_count' => 'integer|max:255',
@@ -39,7 +41,7 @@ class CreateAccount extends Component
         session()->flash('message', 'Account created successfully.');
         
         // Redirect to the homepage
-        return redirect()->route('accounts');
+        return redirect('/accounts');
     }
 
 
