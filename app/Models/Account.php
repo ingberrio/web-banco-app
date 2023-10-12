@@ -10,4 +10,9 @@ class Account extends Model
     use HasFactory;
     protected $table = 'accounts';
     protected $fillable = ['name', 'identification', 'balance', 'transactions_count', 'tipo'];
+
+    public function costumer()
+    {
+        return $this->belongsTo(Costumer::class);
+    }
 }

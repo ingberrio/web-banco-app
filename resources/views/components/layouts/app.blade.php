@@ -1,18 +1,14 @@
-<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ $title ?? 'Bank App' }}</title>
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    @vite('resources/css/app.css')
+</head>
+<body>
 
-        <title>{{ $title ?? 'Bank App' }}</title>
-        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-
-        @vite('resources/css/app.css')
-       
-    </head>
-    <body>
-
-        <nav class="bg-white border-gray-200 dark:bg-gray-900">
+    <nav class="bg-white border-gray-200 dark:bg-gray-900">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="https://flowbite.com/" class="flex items-center">
                 <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Flowbite Logo" />
@@ -39,8 +35,25 @@
             </ul>
             </div>
         </div>
-        </nav>
-        
-        {{ $slot }}
-        
+    </nav>
+    <div class="w-full p-2 text-center" id="message-container">
+        @if (session()->has('message'))
+            <div class="bg-green-500 text-white p-2 rounded-lg">
+                {{ session('message') }}
+            </div>
+        @endif
+    </div>
+    
+    {{ $slot }}
+    
+    <script>
+        setTimeout(function() {
+            const messageContainer = document.getElementById('message-container');
+            if (messageContainer) {
+                messageContainer.style.display = 'none';
+            }
+        }, 3000);
+    </script>
+    
+</body>
 </html>

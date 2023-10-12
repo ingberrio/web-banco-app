@@ -9,18 +9,24 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('identification');
+            $table->string('identification')->unique();
             $table->decimal('balance', 20, 2);
             $table->string('transactions_count');
-            $table->integer('tipo');
+            $table->string('tipo');
+            $table->foreignId('costumer_id')
+                ->nullable()
+                ->constrained('costumers')
+                ->cascadeOnUpdate()
+                ->restrictOnDelete();
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

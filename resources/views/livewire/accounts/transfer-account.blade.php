@@ -3,10 +3,7 @@
 
     <h2 class="text-2xl font-bold">Comenzar Transferencias</h2>
     <hr class="mt-4 mb-4 pb-3">
-    @if (session()->has('error'))
-        <div class="alert alert-danger">{{ session('error') }}</div>
-        <br>
-    @endif
+    
     <div id="transfer-form-container" wire:ignore>
         <form wire:submit="transfer" >
             @csrf
@@ -37,5 +34,11 @@
     </div>
   
 </div>
-
-
+<script>
+    $(document).ready(function(){
+            window.livewire.on('alert_remove',()=>{
+                setTimeout(function(){ $(".alert-success").fadeOut('fast');
+                }, 3000); // 3 secs
+            });
+        });
+</script>

@@ -16,9 +16,10 @@
                         </ul>
                     </div>
                     <div>
-                    <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded-lg" 
-                        wire:click="transferAccount({{ $account['balance'] }}, {{ $account['identification'] }})" >Transferir</button>
-                        
+                        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded-lg" 
+                            wire:click="transferAccount({{ $account['balance'] }}, {{ $account['identification'] }})" >
+                            Transferir
+                        </button>
                     </div>
                 </div>
             @endforeach

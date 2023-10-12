@@ -1,5 +1,4 @@
-
-@import "~tom-select/dist/scss/tom-select.bootstrap5";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "~tom-select/dist/scss/tom-select.bootstrap5";

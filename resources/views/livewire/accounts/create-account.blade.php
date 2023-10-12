@@ -3,13 +3,6 @@
         <h1 class="text-2xl font-bold">Creación de cuentas</h1>
         <hr class="mt-4 mb-4 pb-3">
 
-        <div class="w-full p-2 text-center">
-            @if (session()->has('message'))
-                <div class="bg-green-500 text-white p-2 rounded-lg">
-                    {{ session('message') }}
-                </div>
-            @endif
-        </div>
         </br>
         <form  wire:submit.prevent="store">
             
