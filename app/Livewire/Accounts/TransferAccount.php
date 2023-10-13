@@ -47,39 +47,48 @@ class TransferAccount extends Component
             'destination_account_id' => 'required|max:255',
             'quantity' => 'required|numeric',
         ]); 
-      
+        
         // Retrieve the ID associated with root_account_id and destination_account_id
         $rootAccountId = Account::where('identification', $this->root_account_id)->value('id');
         $destinationAccountId = Account::where('identification', $this->destination_account_id)->value('id');
-
-        $rootAccount = Account::where('identification', $this->root_account_id)->firstOrFail();
-        $destinationAccount = Account::where('identification', $this->destination_account_id)->firstOrFail();
+        $rootAccountBalance = Account::where('identification', $this->root_account_id)->value('balance');
         
-
-        if (!$destinationAccount) {
-             return redirect()->back()->with('error', 'Cuenta no encontradas');
-        }
-        
-        if ($rootAccount->balance < $this->quantity) {
-            return redirect()->back()->with('error', 'Saldo insuficiente para realizar la transferencia');
-        } 
-        
-        
-        $rootAccount->balance -= $this->quantity;
-        $destinationAccount->balance += $this->quantity;
-
         // Save in the accounts
-        $rootAccount->save();
-        $destinationAccount->save();
-
-        // Create the transfer record using the retrieved IDs
-        $accounts = Transfer::create([
-            'root_account_id' => $rootAccountId,
-            'destination_account_id' => $destinationAccountId,
-            'quantity' => $this->quantity, 
-        ]);
+        switch ($destinationAccountId) {
+            case null:
+                session()->flash('message', 'Verifica el ID de las cuentas.');
+                break;
+            case ($this->quantity <= 0):
+                session()->flash('message', 'No puede ser 0.');
+                break;
+            case ($this->quantity > $rootAccountBalance):
+                session()->flash('message', 'Saldo insuficiente.');
+                break;
+            default:
+                // Perform the transfer
+                $rootAccount = Account::where('identification', $this->root_account_id)->firstOrFail();
+                $destinationAccount = Account::where('identification', $this->destination_account_id)->firstOrFail();    
+                // Subtract the quantity from the root account
+                $rootAccount->balance -= $this->quantity;
+                    
+                // Add the quantity from the root account
+                $destinationAccount->balance += $this->quantity;
         
-        session()->flash('message', 'Transfer created successfully.');
+                // Increment the transactions_count of the model account
+                $rootAccount->increment('transactions_count');
+                    
+                $rootAccount->save();
+                $destinationAccount->save();
+                    
+                // Create the transfer record using the retrieved IDs
+                Transfer::create([
+                    'root_account_id' => $rootAccountId,
+                    'destination_account_id' => $destinationAccountId,
+                    'quantity' => $this->quantity, 
+                ]);
+                    
+                session()->flash('message', 'Transfer created successfully.');
+        }
         
         return redirect('/accounts');
     }

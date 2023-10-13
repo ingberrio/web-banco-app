@@ -8,11 +8,39 @@ use Illuminate\Database\Eloquent\Model;
 class Account extends Model
 {
     use HasFactory;
-    protected $table = 'accounts';
-    protected $fillable = ['name', 'identification', 'balance', 'transactions_count', 'tipo'];
 
-    public function costumer()
+    protected $table = 'accounts';
+
+    protected $fillable = [
+        'name',
+        'identification',
+        'balance',
+        'transactions_count',
+        'tipo',
+        'customer_id', 
+    ];
+
+    // Relación muchos a uno con el modelo Customer
+    public function customer()
     {
-        return $this->belongsTo(Costumer::class);
+        return $this->belongsTo(Customer::class);
+    }
+
+    // Relación uno a muchos con el modelo Balance
+    public function balances()
+    {
+        return $this->hasMany(Balance::class);
+    }
+
+    // Relación uno a muchos con el modelo Transfer (como cuenta de origen)
+    public function transfersFrom()
+    {
+        return $this->hasMany(Transfer::class, 'root_account_id');
+    }
+
+    // Relación uno a muchos con el modelo Transfer (como cuenta de destino)
+    public function transfersTo()
+    {
+        return $this->hasMany(Transfer::class, 'destination_account_id');
     }
 }

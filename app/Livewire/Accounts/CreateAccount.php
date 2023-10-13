@@ -37,11 +37,11 @@ class CreateAccount extends Component
         
         $identification = $this->identification;
        
-        // Verificar si el cliente ya existe
+        // Check if the client already exists
         $costumer = Costumer::where('identification', $identification)->first();
         
         if (!$costumer) {
-            // Si no existe, crea un nuevo cliente
+            // If does'n exist, create a new costumer
             $costumer = Costumer::create([
                 'name' => $request->input('name'),
                 'identification' => $identification,
@@ -59,8 +59,7 @@ class CreateAccount extends Component
             'name' => $this->name,
             'identification' => $this->identification,
             'balance' => $this->balance,
-            'transactions_count' => $this->transactions_count,
-            'tipo' => $this->tipo
+            'transactions_count' => $this->transactions_count
         ]);
 
         session()->flash('message', 'Account created successfully.');

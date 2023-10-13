@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('identification')->unique();
             $table->decimal('balance', 20, 2);
             $table->string('transactions_count');
-            $table->string('tipo');
             $table->foreignId('costumer_id')
                 ->nullable()
                 ->constrained('costumers')

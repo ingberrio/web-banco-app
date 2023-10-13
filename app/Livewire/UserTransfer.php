@@ -45,12 +45,16 @@ final class UserTransfer extends PowerGridComponent
         return Transfer::query()
             ->join('accounts as source_account', 'transfers.root_account_id', '=', 'source_account.id')
             ->join('accounts as destination_account', 'transfers.destination_account_id', '=', 'destination_account.id')
-            ->select('transfers.*', 'source_account.name as source_account_name', 'destination_account.name as destination_account_name');
+            ->select('transfers.*', 'source_account.name as source_account_name', 
+                'destination_account.name as destination_account_name',
+                'source_account.transactions_count as source_transactions_count',);
     }
 
     public function relationSearch(): array
     {
-        return [];
+        return [
+            'rootAccount' => ['name']
+        ];
     }
 
     public function addColumns(): PowerGridColumns
@@ -59,23 +63,29 @@ final class UserTransfer extends PowerGridComponent
             ->addColumn('id')
             ->addColumn('source_account_name')
             ->addColumn('quantity')
-            
             ->addColumn('destination_account_name')
+            ->addColumn('source_transactions_count')
             ->addColumn('created_at_formatted', fn (Transfer $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
     }
 
     public function columns(): array
     {
         return [
-            Column::make('Cuenta Origen', 'source_account_name'),
+            Column::make('Total trans.', 'source_transactions_count' )
+                    ->searchable()
+                    ->sortable(),
+            Column::make('Cuenta Origen', 'source_account_name' )
+                    ->searchable()
+                    ->sortable(),
             Column::make('Quantity', 'quantity')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('cuenta Destino', 'destination_account_name'),
+                    ->sortable()
+                    ->searchable(),
+            Column::make('cuenta Destino', 'destination_account_name')
+                    ->searchable()
+                    ->sortable(),
             Column::make('Created at', 'created_at_formatted', 'created_at')
+                ->searchable()
                 ->sortable(),
-
             Column::action('Action')
         ];
     }
