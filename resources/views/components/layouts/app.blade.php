@@ -4,7 +4,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Bank App' }}</title>
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    @livewireStyles
     @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
 </head>
 <body>
 
@@ -45,7 +48,6 @@
     </div>
     
     {{ $slot }}
-    
     <script>
         setTimeout(function() {
             const messageContainer = document.getElementById('message-container');
@@ -54,6 +56,7 @@
             }
         }, 3000);
     </script>
-    
+   
+    @livewireScripts
 </body>
 </html>

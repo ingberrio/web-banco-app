@@ -32,13 +32,4 @@
             <button wire:click.prevent="transfer" class="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded-lg" >Aceptar</button>
         </form>
     </div>
-  
 </div>
-<script>
-    $(document).ready(function(){
-            window.livewire.on('alert_remove',()=>{
-                setTimeout(function(){ $(".alert-success").fadeOut('fast');
-                }, 3000); // 3 secs
-            });
-        });
-</script>

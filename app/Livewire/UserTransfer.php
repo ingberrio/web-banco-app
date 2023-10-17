@@ -65,7 +65,9 @@ final class UserTransfer extends PowerGridComponent
             ->addColumn('quantity')
             ->addColumn('destination_account_name')
             ->addColumn('source_transactions_count')
-            ->addColumn('created_at_formatted', fn (Transfer $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
+            ->addColumn('created_at_formatted', fn (Transfer $model) 
+                => Carbon::parse($model->created_at)
+                ->format('d/m/Y'));
     }
 
     public function columns(): array
@@ -91,13 +93,11 @@ final class UserTransfer extends PowerGridComponent
     }
 
     public function filters(): array
-    {
-        $accountOptions = DB::table('accounts')->pluck('name', 'name')->toArray();
-        
+    { 
         return [
-            Filter::datepicker('created_at'),
             Filter::number('quantity', 'Quantity'),
-            //Filter::select('source_account_name', 'Cuenta Origen', $accountOptions ?? []),
+            //crete flatpicker filter
+            Filter::datePicker('created_at','transfers.created_at')
         ];
     }
 
