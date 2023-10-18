@@ -9,11 +9,11 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 
-class Costumer extends Model
+class Customer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'identification', 'costumer_id'];
+    protected $fillable = ['name', 'identification', 'customer_id'];
     //add norequired email
 
     public function accounts()

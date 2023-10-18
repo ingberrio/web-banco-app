@@ -5,26 +5,14 @@ namespace App\Livewire\Accounts;
 use Livewire\Component;
 use App\Models\Account;
 use App\Models\Transfer;
+use App\Models\Balance;
 use Illuminate\Http\Request;
 use Livewire\Attributes\On; 
+use Illuminate\Support\Carbon;
 
 class TransferAccount extends Component
 {
     
-    //     try {
-    //         $rootAccount = Account::where('identification', $this->root_account_id)->firstOrFail();
-    //     }
-    //     catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e)
-    //     {
-    //         // Model Not Found
-    //         return redirect()->back()->with('error', 'Saldo insuficiente para realizar la transferencia');
-    //     }
-    //     catch (\Exception $e)
-    //     {
-    //         // Something else went wrong
-    //         return redirect()->back()->with('error', 'Saldo insuficiente para realizar la transferencia');
-    //     }
-    // }
     #[Rule('required')]
     public $root_account_id = '';
     
@@ -68,6 +56,7 @@ class TransferAccount extends Component
                 // Perform the transfer
                 $rootAccount = Account::where('identification', $this->root_account_id)->firstOrFail();
                 $destinationAccount = Account::where('identification', $this->destination_account_id)->firstOrFail();    
+               
                 // Subtract the quantity from the root account
                 $rootAccount->balance -= $this->quantity;
                     
@@ -75,16 +64,32 @@ class TransferAccount extends Component
                 $destinationAccount->balance += $this->quantity;
         
                 // Increment the transactions_count of the model account
-                $rootAccount->increment('transactions_count');
+                $rootAccount->transactions_count++;
                     
                 $rootAccount->save();
                 $destinationAccount->save();
                     
                 // Create the transfer record using the retrieved IDs
-                Transfer::create([
+                $transfer = Transfer::create([
                     'root_account_id' => $rootAccountId,
                     'destination_account_id' => $destinationAccountId,
                     'quantity' => $this->quantity, 
+                ]);
+
+                // Create the balance record using the transfer_id from the created Transfer record
+                // Balance::create([
+                //     'account_id' => $rootAccountId,
+                //     'transfer_id' => $transfer->id,  
+                //     'previous_balance' => $rootAccount->balance,  
+                //     'new_balance' => $this->quantity,
+                // ]);
+
+                // Create the balance from destination_id record
+                Balance::create([
+                    'account_id' => $destinationAccountId,
+                    'transfer_id' => $transfer->id,  
+                    'previous_balance' => $destinationAccount->balance,  
+                    'new_balance' => $rootAccount->balance,
                 ]);
                     
                 session()->flash('message', 'Transfer created successfully.');
@@ -103,7 +108,6 @@ class TransferAccount extends Component
      * @return void
      */
     #[On('transferAccount')]
-    
     public function fillTransferForm($balance, $identification)
     {
         $this->root_account_id = $identification;

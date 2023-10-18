@@ -5,7 +5,7 @@ namespace App\Livewire\Accounts;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use App\Models\Account;
-use App\Models\Costumer;
+use App\Models\Customer;
 
 class CreateAccount extends Component
 {
@@ -24,7 +24,7 @@ class CreateAccount extends Component
     public $phone ='';
     public $email ='';
 
-    public $costumer_id ='';
+    public $customer_id ='';
 
 
     public function render()
@@ -38,11 +38,11 @@ class CreateAccount extends Component
         $identification = $this->identification;
        
         // Check if the client already exists
-        $costumer = Costumer::where('identification', $identification)->first();
+        $customer = Customer::where('identification', $identification)->first();
         
-        if (!$costumer) {
-            // If does'n exist, create a new costumer
-            $costumer = Costumer::create([
+        if (!$customer) {
+            // If does'n exist, create a new customer
+            $customer = Customer::create([
                 'name' => $request->input('name'),
                 'identification' => $identification,
             ]);

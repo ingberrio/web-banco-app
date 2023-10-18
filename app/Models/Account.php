@@ -10,14 +10,18 @@ class Account extends Model
     use HasFactory;
 
     protected $table = 'accounts';
-
+    protected $casts = [
+        'transactions_count' => 'integer',
+    ];
     protected $fillable = [
         'name',
         'identification',
         'balance',
         'transactions_count',
-        'tipo',
+        'transactions_month',
+        'current_month',
         'customer_id', 
+        'updated_at'
     ];
 
     // Relación muchos a uno con el modelo Customer

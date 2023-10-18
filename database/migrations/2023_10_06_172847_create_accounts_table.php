@@ -16,10 +16,11 @@ return new class extends Migration
             $table->string('name');
             $table->string('identification')->unique();
             $table->decimal('balance', 20, 2);
-            $table->string('transactions_count');
-            $table->foreignId('costumer_id')
-                ->nullable()
-                ->constrained('costumers')
+            $table->string('transactions_count')->default(0);
+            $table->integer('transactions_month')->default(0);
+            $table->integer('current_month')->default(0);
+            $table->foreignId('customer_id')->nullable()
+                ->constrained('customers')
                 ->cascadeOnUpdate()
                 ->restrictOnDelete();
             $table->timestamps();

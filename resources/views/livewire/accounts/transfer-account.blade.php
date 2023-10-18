@@ -1,6 +1,4 @@
-
 <div class="bg-white shadow-md rounded-lg p-5 mt-2">
-
     <h2 class="text-2xl font-bold">Comenzar Transferencias</h2>
     <hr class="mt-4 mb-4 pb-3">
     
@@ -32,4 +30,6 @@
             <button wire:click.prevent="transfer" class="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded-lg" >Aceptar</button>
         </form>
     </div>
+  
 </div>
+

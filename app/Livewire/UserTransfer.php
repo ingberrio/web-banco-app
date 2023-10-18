@@ -45,9 +45,11 @@ final class UserTransfer extends PowerGridComponent
         return Transfer::query()
             ->join('accounts as source_account', 'transfers.root_account_id', '=', 'source_account.id')
             ->join('accounts as destination_account', 'transfers.destination_account_id', '=', 'destination_account.id')
+            ->join('balances as balance_account', 'transfers.id', '=', 'balance_account.transfer_id')
             ->select('transfers.*', 'source_account.name as source_account_name', 
                 'destination_account.name as destination_account_name',
-                'source_account.transactions_count as source_transactions_count',);
+                'source_account.transactions_count as source_transactions_count',
+                'balance_account.new_balance as balance_account');
     }
 
     public function relationSearch(): array
@@ -67,7 +69,8 @@ final class UserTransfer extends PowerGridComponent
             ->addColumn('source_transactions_count')
             ->addColumn('created_at_formatted', fn (Transfer $model) 
                 => Carbon::parse($model->created_at)
-                ->format('d/m/Y'));
+                ->format('d/m/Y'))
+            ->addColumn('balance_account');
     }
 
     public function columns(): array
@@ -79,15 +82,16 @@ final class UserTransfer extends PowerGridComponent
             Column::make('Cuenta Origen', 'source_account_name' )
                     ->searchable()
                     ->sortable(),
-            Column::make('Quantity', 'quantity')
+            Column::make('Monto', 'quantity')
                     ->sortable()
                     ->searchable(),
-            Column::make('cuenta Destino', 'destination_account_name')
+            Column::make('Cuenta Destino', 'destination_account_name')
                     ->searchable()
                     ->sortable(),
-            Column::make('Created at', 'created_at_formatted', 'created_at')
+            Column::make('Creada', 'created_at_formatted', 'created_at')
                 ->searchable()
                 ->sortable(),
+            Column::make('Saldo', 'balance_account'),
             Column::action('Action')
         ];
     }
@@ -96,8 +100,8 @@ final class UserTransfer extends PowerGridComponent
     { 
         return [
             Filter::number('quantity', 'Quantity'),
-            //crete flatpicker filter
             Filter::datePicker('created_at','transfers.created_at')
+                
         ];
     }
 

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('costumers', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
             $table->string('email')->default('')->nullable();
@@ -28,7 +28,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('costumers');
+        Schema::dropIfExists('customers');
     }
 
 
@@ -37,13 +37,13 @@ return new class extends Migration
     {
         $data = $request->validate([
             'name' => 'required|string',
-            'email' => 'required|email|unique:costumers,email',
+            'email' => 'required|email|unique:customers,email',
             'phone' => 'required|string',
             
         ]);
 
-        $costumer = Costumer::create($data);
+        $customer = Customer::create($data);
 
-        return redirect()->route('costumers.index')->with('message', 'Cliente creado exitosamente.');
+        return redirect()->route('customers.index')->with('message', 'Cliente creado exitosamente.');
     }
 };

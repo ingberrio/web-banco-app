@@ -37,8 +37,8 @@ class CalculateDailyInterest extends Command
 
         // Verifica si es el primer día del mes
         if ($today->day === 1) {
-            // Es el primer día del mes, restablece el campo mes_actual y el contador de transacciones
-            Account::update(['mes_actual' => $today->month, 'transacciones_mensuales' => 0]);
+            // Es el primer día del mes, restablece el campo current_month y el contador de transacciones
+            Account::update(['current_month' => $today->month, 'transaction_month' => 0]);
         }
 
         // Excluye sábados y domingos (día 6 y día 7 en Carbon)
@@ -65,7 +65,7 @@ class CalculateDailyInterest extends Command
             }
 
             // Verifica el número de transacciones mensuales
-            $transaccionesMensuales = $account->transacciones_mensuales;
+            $transaccionesMensuales = $account->transaction_month;
 
             // Realiza ajustes en la tasa de interés según el número de transacciones
             if ($transaccionesMensuales >= 10) {
@@ -81,7 +81,7 @@ class CalculateDailyInterest extends Command
             $account->balance += $interesDiario;
 
             // Incrementa el contador de transacciones mensuales
-            $account->transacciones_mensuales++;
+            $account->transaction_month++;
 
             // Guarda la cuenta actualizada en la base de datos
             $account->save();

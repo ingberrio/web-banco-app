@@ -9,9 +9,9 @@ class Balance extends Model
 {
     use HasFactory;
 
-    // Atributos que son asignables en masa
+    // Atributos que son asignables
     protected $fillable = [
-        'account_id', 'transfer_id', 'amount', 'date',
+        'account_id', 'transfer_id', 'previous_balance', 'new_balance',
     ];
 
     // Definición de las relaciones

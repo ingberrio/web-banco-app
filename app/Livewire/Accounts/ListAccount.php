@@ -21,6 +21,4 @@ class ListAccount extends Component
     {
         $this->dispatch('transferAccount', $balance, $identification);
     }
-    
-
 }
