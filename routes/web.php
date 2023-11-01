@@ -21,7 +21,7 @@ use App\Livewire\Accounts\AccountForm;
 */
 Route::middleware(['web'])->group(function () {
     
-    Route::get('/', Index::class);
+    Route::get('/', Index::class)->name('index');
 
     Route::get('/accounts', Account::class)->name('accounts');
     

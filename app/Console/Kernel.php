@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
+        //$schedule->command('calculate:CalculateDailyInterest')->dailyAt('00:00');
     }
 
     /**
@@ -31,6 +32,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \App\Console\Commands\CalculateDailyInterest::class, // Comando personalizado
-    ];
+        Commands\CalculateDailyInterest::class,
+    ];    
+    
 }

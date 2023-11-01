@@ -32,4 +32,11 @@
     </div>
   
 </div>
-
+<script data-navigate-once>
+        setTimeout(function() {
+            const messageContainer = document.getElementById('message-container');
+            if (messageContainer) {
+                messageContainer.style.display = 'none';
+            }
+        }, 3000);
+    </script>

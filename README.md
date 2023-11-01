@@ -64,14 +64,14 @@ This is a simple web application for managing bank accounts and performing trans
 
 8. Access the application in your web browser at `http://localhost:8000`.
 
-9. Add cronjob to CalculateDailyInterest
+9. Command schedule run autommaticlly but if you want add cronjob to CalculateDailyInterest
     
     - open in a terminal: crontab -e
 
     - `* * * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null
 
-    - use to run manual: 
-        php artisan calculate:CalculateDailyInterest
+    - Run command daily interest manual: 
+        php artisan calculate:calculate-daily-interest
 
 
 ## Usage
